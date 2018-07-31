@@ -7,6 +7,8 @@ import urllib.request
 import urllib.parse
 import json
 from flask import Flask
+from flask import request
+
 # from flask import render_template
 
 app = Flask(__name__)
@@ -15,6 +17,10 @@ app = Flask(__name__)
 @app.route('/')
 def main_route():
 	return "hello world!!!"
+
+@app.route('/messages', methods=[POST])
+def messages_route():
+    return request.data
 
 
  
