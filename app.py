@@ -43,19 +43,20 @@ def getMessages(apikey, inboxID):
     fr = f.read()
     return(fr)
 
+if __name__ == "__main__":
+    app.run()
+    apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 
-apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
+    # resp =  sendSMS(apikey, '919205257278',
+    #     'TXTLCL ', 'This is your message')
 
-# resp =  sendSMS(apikey, '919205257278',
-#     'TXTLCL ', 'This is your message')
+    # To get ID
+    inboxes_bytes = getInboxes(apikey)
+    inboxes = json.loads(inboxes_bytes.decode('utf8').replace("'", '"'))
+    inbox_id = inboxes["inboxes"][0]["id"]
+    # print (inbox_id)
 
-# To get ID
-inboxes_bytes = getInboxes(apikey)
-inboxes = json.loads(inboxes_bytes.decode('utf8').replace("'", '"'))
-inbox_id = inboxes["inboxes"][0]["id"]
-# print (inbox_id)
+    messages_bytes = getMessages(apikey, inbox_id)
+    messages = json.loads(messages_bytes.decode('utf8').replace("'", '"'))
 
-messages_bytes = getMessages(apikey, inbox_id)
-messages = json.loads(messages_bytes.decode('utf8').replace("'", '"'))
-
-print(messages)
+    print(messages)
