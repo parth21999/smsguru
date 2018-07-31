@@ -14,13 +14,17 @@ from flask import request
 app = Flask(__name__)
 
 
-@app.route('/')
+@app.route('/', methods=[GET, POST])
 def main_route():
+    if request.method == 'POST':
+        return request.form.get['content']
 	return "hello world!!!"
 
-@app.route('/messages', methods=[POST])
-def messages_route():
-    return request.data
+# @app.route('/messages', methods=[POST])
+# def messages_route():
+#     content = request.form.get['content']
+
+#     return content
 
 
  
