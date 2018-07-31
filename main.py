@@ -2,8 +2,20 @@
  
 # from urllib.parse import parse
 
+
 import urllib.request
 import urllib.parse
+import json
+from flask import Flask
+# from flask import render_template
+
+app = Flask(__name__)
+
+app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+
+@app.route('/')
+def main_route():
+	return "hello world!!!"
 
 
  
@@ -31,9 +43,20 @@ def getMessages(apikey, inboxID):
     f = urllib.request.urlopen(request, data)
     fr = f.read()
     return(fr)
- 
-# resp =  sendSMS('A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ', '919205257278',
+
+
+apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
+
+# resp =  sendSMS(apikey, '919205257278',
 #     'TXTLCL ', 'This is your message')
 
-inboxes = getInboxes('A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ')
-print (inboxes)
+# To get ID
+inboxes_bytes = getInboxes(apikey)
+inboxes = json.loads(inboxes_bytes.decode('utf8').replace("'", '"'))
+inbox_id = inboxes["inboxes"][0]["id"]
+# print (inbox_id)
+
+messages_bytes = getMessages(apikey, inbox_id)
+messages = json.loads(messages_bytes.decode('utf8').replace("'", '"'))
+
+print(messages)
