@@ -12,19 +12,34 @@ from flask import request
 # from flask import render_template
 
 app = Flask(__name__)
+apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
+
+
+def sendSMS(apikey, numbers, sender, message):
+	data =  urllib.parse.urlencode({'apikey': apikey, 'numbers': numbers,
+		'message' : message, 'sender': sender})
+	data = data.encode('utf-8')
+	request = urllib.request.Request("https://api.textlocal.in/send/?")
+	f = urllib.request.urlopen(request, data)
+	fr = f.read()
+	return(fr)
 
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
 	if request.method == "POST":
+		number = request.form.get('sender')
+		content = request.form.get('content')
+		credits = request.form.get('credits')
+		print("SENDER TYPE: " + type(sender))
+		print("CONTENT TYPE: " + type(content))
+		print("CREDITS TYPE: " + type(credits))
+
+		if(credits > 0):
+			sendSMS(apikey, number, 'TXTLCL', content)
+
 		print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-
-@app.route('/messages', methods=["POST"])
-def messages_route():
-	content = request.form.get['content']
-
-	return content
 
 if __name__ == "__main__":
 	app.run()
@@ -33,14 +48,6 @@ if __name__ == "__main__":
 
 
 
-# def sendSMS(apikey, numbers, sender, message):
-# 	data =  urllib.parse.urlencode({'apikey': apikey, 'numbers': numbers,
-# 		'message' : message, 'sender': sender})
-# 	data = data.encode('utf-8')
-# 	request = urllib.request.Request("https://api.textlocal.in/send/?")
-# 	f = urllib.request.urlopen(request, data)
-# 	fr = f.read()
-# 	return(fr)
 
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
@@ -49,26 +56,13 @@ if __name__ == "__main__":
 # 	f = urllib.request.urlopen(request, data)
 # 	fr = f.read()
 # 	return(fr)
-
-# def getMessages(apikey, inboxID):
-# 	data =  urllib.parse.urlencode({'apikey': apikey, 'inbox_id' : inboxID})
-# 	data = data.encode('utf-8')
-# 	request = urllib.request.Request("https://api.textlocal.in/get_messages/?")
-# 	f = urllib.request.urlopen(request, data)
-# 	fr = f.read()
-# 	return(fr)
-
 # def stuff():
-# 	apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 
 # 	# resp =  sendSMS(apikey, '919205257278',
 # 	#     'TXTLCL ', 'This is your message')
 
-# 	# To get ID
-# 	inboxes_bytes = getInboxes(apikey)
-# 	inboxes = json.loads(inboxes_bytes.decode('utf8').replace("'", '"'))
-# 	inbox_id = inboxes["inboxes"][0]["id"]
-# 	# print (inbox_id)
+
+
 
 # 	messages_bytes = getMessages(apikey, inbox_id)
 # 	messages = json.loads(messages_bytes.decode('utf8').replace("'", '"'))
