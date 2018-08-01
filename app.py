@@ -17,7 +17,7 @@ app = Flask(__name__)
 @app.route('/', methods=["GET", "POST"])
 def main_route():
 	if request.method == "POST":
-		print(request.form.get['content'])
+		print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
 
 @app.route('/messages', methods=["POST"])
