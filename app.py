@@ -28,15 +28,13 @@ def sendSMS(apikey, numbers, sender, message):
 @app.route('/', methods=["GET", "POST"])
 def main_route():
 	if request.method == "POST":
-		number = request.form.get('sender')
+		sender_number = request.form.get('sender')
 		content = request.form.get('content')
 		credits = request.form.get('credits')
-		print( type(number))
-		print( type(content))
-		print( type(credits))
 
-		# if(credits > 0):
-		# 	sendSMS(apikey, number, 'TXTLCL', content)
+		if(credits > 0):
+			sendSMS(apikey, sender_number, 'TXTLCL', content)
+			print("Sent SMS to" + sender_number)
 
 		print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
