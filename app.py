@@ -35,8 +35,8 @@ def main_route():
 		print("CONTENT TYPE: " + type(content))
 		print("CREDITS TYPE: " + type(credits))
 
-		if(credits > 0):
-			sendSMS(apikey, number, 'TXTLCL', content)
+		# if(credits > 0):
+		# 	sendSMS(apikey, number, 'TXTLCL', content)
 
 		print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
