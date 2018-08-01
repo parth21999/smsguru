@@ -15,8 +15,8 @@ app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 
 
-def sendSMS(apikey, numbers, sender, message):
-	data =  urllib.parse.urlencode({'apikey': apikey, 'numbers': numbers,
+def sendSMS(numbers, sender, message):
+	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 'numbers': numbers,
 		'message' : message, 'sender': sender})
 	data = data.encode('utf-8')
 	request = urllib.request.Request("https://api.textlocal.in/send/?")
@@ -35,7 +35,7 @@ def main_route():
 		print(sender_number)
 
 		if(int(credits) > 0):
-			send_resp = sendSMS(apikey, sender_number, 'TXTLCL', content).decode('utf8').replace("'", '"')
+			send_resp = sendSMS(sender_number, 'TXTLCL', content).decode('utf8').replace("'", '"')
 			print("Response: " + send_resp)
 
 		print("MESSAGE CONTENT: " + request.form.get('content'))
