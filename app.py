@@ -31,9 +31,9 @@ def main_route():
 		number = request.form.get('sender')
 		content = request.form.get('content')
 		credits = request.form.get('credits')
-		print("SENDER TYPE: " + type(number))
-		print("CONTENT TYPE: " + type(content))
-		print("CREDITS TYPE: " + type(credits))
+		print( type(number))
+		print( type(content))
+		print( type(credits))
 
 		# if(credits > 0):
 		# 	sendSMS(apikey, number, 'TXTLCL', content)
