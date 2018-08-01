@@ -16,6 +16,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
+	print("PRINTING TO LOGS")
 	if request.method == "POST":
 		return request.form.get['content']
 	else:
