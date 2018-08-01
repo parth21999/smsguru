@@ -21,14 +21,16 @@ def main_route():
 	else:
 		return "hello world!!!"
 
+@app.route('/messages', methods=[POST])
+def messages_route():
+	content = request.form.get['content']
+
+	return content
+
 if __name__ == "__main__":
 	app.run()
 
-# @app.route('/messages', methods=[POST])
-# def messages_route():
-#     content = request.form.get['content']
 
-#     return content
 
 
 
