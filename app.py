@@ -16,12 +16,12 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
-	if request.method == 'POST':
+	if request.method == "POST":
 		return request.form.get['content']
 	else:
 		return "hello world!!!"
 
-@app.route('/messages', methods=[POST])
+@app.route('/messages', methods=["POST"])
 def messages_route():
 	content = request.form.get['content']
 
