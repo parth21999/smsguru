@@ -27,7 +27,7 @@ def sendSMS(numbers, sender, message):
 	return(fr)
 
 def shrink_content(content):
-	char_limit = 900
+	char_limit = 160
 	last_period = content[:char_limit].rfind('.')
 	return content[:last_period + 1]
 
@@ -64,7 +64,7 @@ def main_route():
 
 		if(int(credits) > 0):
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
-			# print("Response: " + send_resp)
+			print("Response: " + send_resp)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
