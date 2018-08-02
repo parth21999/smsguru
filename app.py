@@ -14,6 +14,8 @@ from flask import request
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
+keyword = '7B3D9'
+
 
 
 def sendSMS(numbers, sender, message):
@@ -31,6 +33,17 @@ def search_wikipedia(search_word):
 	print(type(content))
 	return content
 
+def clean_sms_content(sms_content):
+	sms_content = sms_content.replace(keyword, '')
+	sms_content = sms_content.strip()
+	return sms_content
+
+	
+def get_info(sms_content):
+	to_search = clean_sms_content(sms_content)
+	info = search_wikipedia(to_search)
+	return info
+
 
 
 
@@ -41,13 +54,15 @@ def main_route():
 		content = request.form.get('content')
 		credits = request.form.get('credits')
 
-		print(sender_number)
+		info_to_send = get_info(content)
+
+		# print(sender_number)
 
 		if(int(credits) > 0):
 			send_resp = sendSMS(sender_number, 'TXTLCL', content).decode('utf8').replace("'", '"')
-			print("Response: " + send_resp)
+			# print("Response: " + send_resp)
 
-		print("MESSAGE CONTENT: " + request.form.get('content'))
+		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
 
 if __name__ == "__main__":
