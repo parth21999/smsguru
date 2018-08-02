@@ -9,6 +9,7 @@ import json
 import wikipedia
 from flask import Flask
 from flask import request
+from googletrans import Translator
 
 
 app = Flask(__name__)
@@ -42,11 +43,16 @@ def clean_sms_content(sms_content):
 	sms_content = sms_content.strip()
 	return sms_content
 
+def translate(info):
+	translator = Translator()
+	info_in_hindi = translator.translate(info, dest='hindi')
+	return info_in_hindi
 	
 def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
 	info = search_wikipedia(to_search)
-	return info
+	info_in_hindi = translate(info)
+	return info_in_hindi
 
 
 
