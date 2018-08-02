@@ -6,6 +6,7 @@
 import urllib.request
 import urllib.parse
 import json
+import wikipedia
 from flask import Flask
 from flask import request
 
@@ -23,6 +24,14 @@ def sendSMS(numbers, sender, message):
 	f = urllib.request.urlopen(request, data)
 	fr = f.read()
 	return(fr)
+
+def search_wikipedia(search_word):
+	top_result = wikipedia.search(search_word)[0]
+	content = wikipedia.page(top_result).content[:160]
+	print(type(content))
+	return content
+
+
 
 
 @app.route('/', methods=["GET", "POST"])
