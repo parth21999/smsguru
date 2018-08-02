@@ -10,7 +10,6 @@ import wikipedia
 from flask import Flask
 from flask import request
 
-# from flask import render_template
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
@@ -27,10 +26,15 @@ def sendSMS(numbers, sender, message):
 	fr = f.read()
 	return(fr)
 
+def shrink_content(content):
+	char_limit = 900
+	last_period = content[:char_limit].rfind('.')
+	return content[:last_period + 1]
+
 def search_wikipedia(search_word):
 	top_result = wikipedia.search(search_word)[0]
-	content = wikipedia.page(top_result).content[:160]
-	print(type(content))
+	content = wikipedia.page(top_result).content
+	content = shrink_content(content)
 	return content
 
 def clean_sms_content(sms_content):
