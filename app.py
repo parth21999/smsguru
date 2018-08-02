@@ -59,7 +59,7 @@ def main_route():
 		# print(sender_number)
 
 		if(int(credits) > 0):
-			send_resp = sendSMS(sender_number, 'TXTLCL', content).decode('utf8').replace("'", '"')
+			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
 			# print("Response: " + send_resp)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
