@@ -2,7 +2,6 @@
  
 # from urllib.parse import parse
 
-
 import urllib.request
 import urllib.parse
 import json
@@ -10,6 +9,7 @@ import wikipedia
 from flask import Flask
 from flask import request
 from googletrans import Translator
+import HTMLParser
 
 
 app = Flask(__name__)
@@ -47,13 +47,29 @@ def translate(info):
 	translator = Translator()
 	info_in_hindi = translator.translate(info, dest='hindi')
 	return info_in_hindi
+
+class parseTitle(HTMLParser.HTMLParser):
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'Translated':
+        	print("ENTERED FUNCTION")
+            for names, values in attrs:
+                if name == 'text':
+                    return value 
+                
 	
 def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
 	info = search_wikipedia(to_search)
 	info_in_hindi = translate(info)
+	aparser = parseTitle() 
+	info_in_hindi = aparser.feed(info_in_hindi.read())
 	print(info_in_hindi)
 	return info_in_hindi
+
+
+
+
 
 
 
