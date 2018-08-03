@@ -5,7 +5,14 @@
 import urllib.request
 import urllib.parse
 import json
-import wikipedia
+import wikipediaclass parseTitle(HTMLParser.HTMLParser):
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'Translated':
+        	print("ENTERED FUNCTION")
+            for names, values in attrs:
+                if name == 'text':
+                    return valu
 from flask import Flask
 from flask import request
 from googletrans import Translator
@@ -119,4 +126,4 @@ if __name__ == "__main__":
 
 # 	print(messages)
 # 	return
-# testing setup
+# reruning app
