@@ -52,6 +52,7 @@ def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
 	info = search_wikipedia(to_search)
 	info_in_hindi = translate(info)
+	print(info_in_hindi)
 	return info_in_hindi
 
 
