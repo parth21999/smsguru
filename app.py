@@ -20,7 +20,7 @@ keyword = '7B3D9'
 
 def sendSMS(numbers, sender, message):
 	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 'numbers': numbers,
-		'message' : message, 'sender': sender})
+		'message' : message, 'sender': sender, 'unicode' : True})
 	data = data.encode('utf-8')
 	request = urllib.request.Request("https://api.textlocal.in/send/?")
 	f = urllib.request.urlopen(request, data)
@@ -68,7 +68,7 @@ def main_route():
 		# print(sender_number)
 
 		if(int(credits) > 0):
-			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send, unicode=True).decode('utf8').replace("'", '"')
+			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
 			print("Response: " + send_resp)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
