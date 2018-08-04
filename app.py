@@ -50,13 +50,13 @@ def translate(info):
 
 class parseTitle(HTMLParser.HTMLParser):
 
-    def handle_starttag(self, tag, attrs):
-        if tag == 'Translated':
-        	print("ENTERED FUNCTION")
-            for names, values in attrs:
-                if name == 'text':
-                    return value 
-                
+	def handle_starttag(self, tag, attrs):
+		if tag == 'Translated':
+			print("ENTERED FUNCTION")
+			for names, values in attrs:
+				if name == 'text':
+					return value 
+				
 	
 def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
