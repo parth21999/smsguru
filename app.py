@@ -5,7 +5,7 @@
 import urllib.request
 import urllib.parse
 import json
-import wikipediaclass
+import wikipedia
 from flask import Flask
 from flask import request
 from googletrans import Translator
