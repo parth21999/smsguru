@@ -9,7 +9,7 @@ import wikipedia
 from flask import Flask
 from flask import request
 from googletrans import Translator
-import HTMLParser
+from html.parser import HTMLParser
 
 
 app = Flask(__name__)
