@@ -20,5 +20,4 @@ six==1.11.0
 Werkzeug==0.14.1
 wikipedia==1.4.0
 googletrans==2.3.0
-HTMLParser==0.0
 
