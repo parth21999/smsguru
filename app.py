@@ -50,6 +50,7 @@ def translate(info):
 
 class MyHTMLParser(HTMLParser):
 	def handle_starttag(self, tag, attrs):
+		print("attributes: " + attrs)
 		text_index = [e[0] for e in attrs].index("text")
 		text = attrs[text_index][1]
 		for i in range(text_index, len(attrs)):
@@ -62,9 +63,10 @@ def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
 	info = search_wikipedia(to_search)
 	info_in_hindi = translate(info)
+	print("tag: " + info_in_hindi)
 	aparser = MyHTMLParser() 
 	info_in_hindi = aparser.feed(str(info_in_hindi))
-	print(info_in_hindi)
+	print("final: " + info_in_hindi)
 	return info_in_hindi
 
 
