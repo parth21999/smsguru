@@ -48,7 +48,7 @@ def translate(info):
 	info_in_hindi = translator.translate(info, dest='hindi')
 	return info_in_hindi
 
-class MyHTMLParser(HTMLParser.HTMLParser):
+class MyHTMLParser(HTMLParser):
 	def handle_starttag(self, tag, attrs):
 		text_index = [e[0] for e in attrs].index("text")
 		text = attrs[text_index][1]
