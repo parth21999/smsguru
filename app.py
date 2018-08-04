@@ -63,7 +63,7 @@ def get_info(sms_content):
 	info = search_wikipedia(to_search)
 	info_in_hindi = translate(info)
 	aparser = MyHTMLParser() 
-	info_in_hindi = aparser.feed(info_in_hindi)
+	info_in_hindi = aparser.feed(str(info_in_hindi))
 	print(info_in_hindi)
 	return info_in_hindi
 
