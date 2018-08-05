@@ -48,17 +48,19 @@ def translate(info):
 	info_in_hindi = translator.translate(info, dest='hindi')
 	return info_in_hindi
 
-trans_info = ""
+trans_info= ''
 class MyHTMLParser(HTMLParser):
 	def handle_starttag(self, tag, attrs):
-		print("EXECUTING HTMLParser")
-		print("attributes: " + attrs)
 		text_index = [e[0] for e in attrs].index("text")
-		global trans_info
-		trans_info = attrs[text_index][1]
-		for i in range(text_index, len(attrs)):
-			if attrs[i][1] == None:
-				trans_info += ' '+ attrs[i][0]
+		text = attrs[text_index][1]
+		for i in range(text_index + 1, len(attrs)):
+			if attrs[i][1]:
+				break
+			else:
+				text += ' ' + attrs[i][0]
+		global trans_info 
+		trans_info = text 
+
 				
 	
 def get_info(sms_content):
