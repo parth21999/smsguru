@@ -50,6 +50,7 @@ def translate(info):
 
 class MyHTMLParser(HTMLParser):
 	def handle_starttag(self, tag, attrs):
+		print("EXECUTING HTMLParser")
 		print("attributes: " + attrs)
 		text_index = [e[0] for e in attrs].index("text")
 		text = attrs[text_index][1]
