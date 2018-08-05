@@ -66,7 +66,6 @@ def get_info(sms_content):
 	print("tag: " + str(info_in_hindi))
 	aparser = MyHTMLParser() 
 	info_in_hindi = aparser.feed(str(info_in_hindi))
-	
 	return info_in_hindi
 
 
