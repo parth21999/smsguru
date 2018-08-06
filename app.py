@@ -9,7 +9,6 @@ import wikipedia
 from flask import Flask
 from flask import request
 from googletrans import Translator
-from html.parser import HTMLParser
 
 
 app = Flask(__name__)
@@ -45,38 +44,15 @@ def clean_sms_content(sms_content):
 
 def translate(info):
 	translator = Translator()
-	info_in_hindi = translator.translate(info, dest='hindi')
-	return info_in_hindi
+	info_in_hindi = translator.translate([info], dest='hindi')
+	return info_in_hindi[0]
 
-trans_info= ''
-class MyHTMLParser(HTMLParser):
-	def handle_starttag(self, tag, attrs):
-		text_index = [e[0] for e in attrs].index("text")
-		text = attrs[text_index][1]
-		for i in range(text_index + 1, len(attrs)):
-			if attrs[i][1]:
-				break
-			else:
-				text += ' ' + attrs[i][0]
-		global trans_info 
-		trans_info = text 
-
-				
 	
 def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
 	info = search_wikipedia(to_search)
 	info_in_hindi = translate(info)
-	print("tag: " + str(info_in_hindi))
-	aparser = MyHTMLParser() 
-	aparser.feed(str(info_in_hindi))
-	print(trans_info)
-	return trans_info
-
-
-
-
-
+	return info_in_hindi
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
