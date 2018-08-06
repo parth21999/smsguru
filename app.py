@@ -45,6 +45,7 @@ def clean_sms_content(sms_content):
 def translate(info):
 	translator = Translator()
 	info_in_hindi = translator.translate([info], dest='hindi')
+	print(info_in_hindi[0])
 	return info_in_hindi[0]
 
 	
