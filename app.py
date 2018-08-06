@@ -46,7 +46,7 @@ def translate(info):
 	translator = Translator()
 	info_in_hindi = translator.translate(info, dest='hindi')
 	print(info_in_hindi.text)
-	return info_in_hindi.text
+	return info_in_hindi.text.encode('utf-8')
 
 	
 def get_info(sms_content):
