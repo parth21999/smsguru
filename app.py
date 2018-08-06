@@ -19,9 +19,9 @@ keyword = '7B3D9'
 
 def sendSMS(numbers, sender, message):
 	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 'numbers': numbers,
-		'message' : message, 'sender': sender, 'unicode' : 'True'})
+		'message' : message, 'sender': sender})
 	data = data.encode('utf-8')
-	request = urllib.request.Request("https://api.textlocal.in/send/?")
+	request = urllib.request.Request("https://api.textlocal.in/send/?unicode=true")
 	f = urllib.request.urlopen(request, data)
 	fr = f.read()
 	return(fr)
@@ -46,7 +46,7 @@ def translate(info):
 	translator = Translator()
 	info_in_hindi = translator.translate(info, dest='hindi')
 	print(info_in_hindi.text)
-	return info_in_hindi.text.encode('utf-8')
+	return info_in_hindi.text
 
 	
 def get_info(sms_content):
