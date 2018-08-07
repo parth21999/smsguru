@@ -31,7 +31,7 @@ def shrink_content(content):
 	# last_period = content[:char_limit].rfind('.')
 	last_purna_viram = content[:char_limit].rfind('\u0964')
 
-	return content[:last_period + 1]
+	return content[:last_purna_viram + 1]
 
 def search_wikipedia(search_word):
 	top_result = wikipedia.search(search_word)[0]
