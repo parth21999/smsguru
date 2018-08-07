@@ -28,14 +28,22 @@ def sendSMS(numbers, sender, message):
 
 def shrink_content(content):
 	char_limit = 160
-	last_period = content[:char_limit].rfind('.')
+	# last_period = content[:char_limit].rfind('.')
+	last_purna_viram = content[:char_limit].rfind('\u0964')
+
 	return content[:last_period + 1]
 
 def search_wikipedia(search_word):
 	top_result = wikipedia.search(search_word)[0]
 	content = wikipedia.page(top_result).content
-	content = shrink_content(content)
 	return content
+
+def search_hindi_wikipedia(search_word):
+	wikipedia.set_language('hi')
+	content = wikipedia.summary(search_word, chars=600)
+	return content
+
+
 
 def clean_sms_content(sms_content):
 	sms_content = sms_content.replace(keyword, '')
@@ -51,8 +59,13 @@ def translate(info):
 	
 def get_info(sms_content):
 	to_search = clean_sms_content(sms_content)
-	info = search_wikipedia(to_search)
-	info_in_hindi = translate(info)
+	try:
+		info_in_hindi = search_hindi_wikipedia(to_search)
+	except wikipedia.exceptions.PageError:
+		info = search_wikipedia(to_search)
+		info_in_hindi = translate(info)
+
+	info_in_hindi = shrink_content(info_in_hindi)
 	return info_in_hindi
 
 @app.route('/', methods=["GET", "POST"])
