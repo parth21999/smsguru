@@ -40,7 +40,7 @@ def search_wikipedia(search_word):
 
 def search_hindi_wikipedia(search_word):
 	wikipedia.set_lang('hi')
-	content = wikipedia.summary(search_word, chars=600)
+	content = wikipedia.summary(search_word, chars=600,  auto_suggest=False)
 	return content
 
 
