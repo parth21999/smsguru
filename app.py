@@ -64,6 +64,7 @@ def get_info(sms_content):
 		info = search_wikipedia(to_search)
 		info_in_hindi = translate(info)
 
+	print("Before shrinking: " + info_in_hindi) 
 	info_in_hindi = shrink_content(info_in_hindi)
 	print("After shrinking: " + info_in_hindi) 
 	return info_in_hindi
