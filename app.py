@@ -27,7 +27,7 @@ def sendSMS(numbers, sender, message):
 	return(fr)
 	
 def remove_parentheses(content):
-	return content.str.replace(r"\(.*\)","")
+	return content.replace(r"\((.)*\)","")
 
 def shrink_content(content):
 	char_limit = 160
