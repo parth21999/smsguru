@@ -18,8 +18,8 @@ keyword = '7B3D9'
 
 
 def sendSMS(numbers, sender, message):
-	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 'numbers': numbers,
-		'message' : message, 'sender': sender, 'unicode':'true'})
+	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 
+		'numbers': numbers, 'message' : message, 'sender': sender, 'unicode':'true'})
 	data = data.encode('utf-8')
 	request = urllib.request.Request("https://api.textlocal.in/send/?")
 	f = urllib.request.urlopen(request, data)
@@ -40,10 +40,9 @@ def search_wikipedia(search_word):
 
 def search_hindi_wikipedia(search_word):
 	wikipedia.set_lang('hi')
-	content = wikipedia.summary(search_word, chars=600,  auto_suggest=False)
+	search_word_hindi = translate(search_word)
+	content = wikipedia.summary(search_word_hindi, chars=600, auto_suggest=False)
 	return content
-
-
 
 def clean_sms_content(sms_content):
 	sms_content = sms_content.replace(keyword, '')
