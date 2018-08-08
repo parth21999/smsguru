@@ -25,6 +25,9 @@ def sendSMS(numbers, sender, message):
 	f = urllib.request.urlopen(request, data)
 	fr = f.read()
 	return(fr)
+	
+def remove_parentheses(content):
+	return content.str.replace(r"\(.*\)","")
 
 def shrink_content(content):
 	char_limit = 160
