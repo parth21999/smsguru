@@ -65,6 +65,7 @@ def get_info(sms_content):
 		info_in_hindi = translate(info)
 
 	info_in_hindi = shrink_content(info_in_hindi)
+	print("After shrinking: " + info_in_hindi) 
 	return info_in_hindi
 
 @app.route('/', methods=["GET", "POST"])
