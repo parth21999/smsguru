@@ -88,8 +88,8 @@ def translate_to_english(info):
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	to_search_english = translate_to_english(cleaned)
-	to_search_english.append(' .')
-	
+	to_search_english = to_search_english + ' .'
+
 	try:
 		to_search = get_named_entity(to_search_english)[0]
 	except:
