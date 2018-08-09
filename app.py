@@ -6,16 +6,33 @@ import urllib.request
 import urllib.parse
 import json
 import wikipedia
+import re
 from flask import Flask
 from flask import request
 from googletrans import Translator
-
+from nltk import ne_chunk, pos_tag, word_tokenize
+from nltk.tree import Tree
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
 
-
+def get_continuous_chunks(text):
+	chunked = ne_chunk(pos_tag(word_tokenize(text)))
+	prev = None
+	continuous_chunk = []
+	current_chunk = []
+	for i in chunked:
+		if type(i) == Tree:
+			current_chunk.append(" ".join([token for token, pos in i.leaves()]))
+		elif current_chunk:
+			named_entity = " ".join(current_chunk)
+			if named_entity not in continuous_chunk:
+				continuous_chunk.append(named_entity)
+				current_chunk = []
+			else:
+				continue
+	return continuous_chunk
 
 def sendSMS(numbers, sender, message):
 	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 
@@ -27,7 +44,8 @@ def sendSMS(numbers, sender, message):
 	return(fr)
 	
 def remove_parentheses(content):
-	return content.replace(r"\((.)*\)","")
+	clean_content = re.sub(r'\([^)]*\)', '', content)
+	return clean_content
 
 def shrink_content(content):
 	char_limit = 160
