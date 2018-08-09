@@ -20,5 +20,5 @@ six==1.11.0
 Werkzeug==0.14.1
 wikipedia==1.4.0
 googletrans==2.3.0
-nltk==3.3
+nltk==3.3.0
 
