@@ -65,7 +65,7 @@ def search_wikipedia(search_word):
 
 def search_hindi_wikipedia(search_word):
 	wikipedia.set_lang('hi')
-	search_word_hindi = translate(search_word)
+	search_word_hindi = translate_to_hindi(search_word)
 	content = wikipedia.summary(search_word_hindi, chars=600, auto_suggest=False)
 	return content
 
