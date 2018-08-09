@@ -17,7 +17,7 @@ app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
 
-def get_continuous_chunks(text):
+def get_named_entity(text):
 	chunked = ne_chunk(pos_tag(word_tokenize(text)))
 	prev = None
 	continuous_chunk = []
@@ -45,6 +45,7 @@ def sendSMS(numbers, sender, message):
 	
 def remove_parentheses(content):
 	clean_content = re.sub(r'\([^)]*\)', '', content)
+	clean_content = re.sub(r'\[[^)]*\]', '', clean_content)
 	return clean_content
 
 def shrink_content(content):
@@ -73,24 +74,35 @@ def clean_sms_content(sms_content):
 	sms_content = sms_content.strip()
 	return sms_content
 
-def translate(info):
+def translate_to_hindi(info):
 	translator = Translator()
 	info_in_hindi = translator.translate(info, dest='hindi')
-	print(info_in_hindi.text)
 	return info_in_hindi.text
+
+def translate_to_english(info):
+	translator = Translator()
+	info_in_english = translator.translate(info, dest='english')
+	return info_in_english.text
 
 	
 def get_info(sms_content):
-	to_search = clean_sms_content(sms_content)
+	cleaned = clean_sms_content(sms_content)
+	to_search_english = translate_to_english(cleaned)
+	to_search_english.append(' .')
+	try:
+		to_search = get_named_entity(to_search_english)[0]
+	except:
+		to_search = to_search_english
+
 	try:
 		info_in_hindi = search_hindi_wikipedia(to_search)
 	except wikipedia.exceptions.PageError:
 		info = search_wikipedia(to_search)
-		info_in_hindi = translate(info)
+		info_in_hindi = translate_to_hindi(info)
 
-	print("Before shrinking: " + info_in_hindi) 
-	info_in_hindi = shrink_content(info_in_hindi)
-	print("After shrinking: " + info_in_hindi) 
+	# print("Before shrinking: " + info_in_hindi) 
+	info_in_hindi = remove_parentheses(shrink_content(info_in_hindi))
+	# print("After shrinking: " + info_in_hindi) 
 	return info_in_hindi
 
 @app.route('/', methods=["GET", "POST"])
