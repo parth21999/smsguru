@@ -97,6 +97,8 @@ def get_info(sms_content):
 	except:
 		to_search = to_search_english
 
+	print('to_search: ' + to_search)
+
 	try:
 		info_in_hindi = search_hindi_wikipedia(to_search)
 	except wikipedia.exceptions.PageError:
