@@ -13,9 +13,23 @@ from googletrans import Translator
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
 
+# For selenium
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
+chrome_options = Options()
+chrome_options.add_argument("--window-size=1024x768")
+chrome_options.add_argument("--headless")
+driver = webdriver.Chrome(chrome_options=chrome_options)
+#####
+
+
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
+
+# st = StanfordNERTagger(model_filename=modelfile, path_to_jar=jarfile)
+
 
 def get_named_entity(text):
 	chunked = ne_chunk(pos_tag(word_tokenize(text)))
@@ -84,6 +98,20 @@ def translate_to_english(info):
 	info_in_english = translator.translate(info, dest='english')
 	return info_in_english.text
 
+def ask_google(query):
+
+	# Search for query
+	query = query.replace(' ', '+')
+
+	driver.get('http://www.google.com/search?q=' + query)
+
+	# Get text from Google answer box
+
+	answer = driver.execute_script( "return document.elementFromPoint(arguments[0], arguments[1]);", 350, 230).text
+
+	return answer
+
+
 	
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
@@ -91,6 +119,8 @@ def get_info(sms_content):
 	to_search_english = to_search_english + ' .'
 
 	print('to_search_english: ' + to_search_english)
+
+	print("ask_google: " + ask_google(to_search_english))
 
 	try:
 		to_search = get_named_entity(to_search_english)[0]
