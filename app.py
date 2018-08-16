@@ -12,19 +12,18 @@ from flask import request
 from googletrans import Translator
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
+import os
 
 # For selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
-GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
-CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 chrome_options = Options()
-chrome_options.binary_location = GOOGLE_CHROME_BIN
+chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN', None)
 chrome_options.add_argument("--window-size=1024x768")
 chrome_options.add_argument("--headless")
-driver = webdriver.Chrome(executable_path = CHROMEDRIVER_PATH, chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path = "chromedriver", chrome_options=chrome_options)
 #####
 
 
