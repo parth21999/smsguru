@@ -19,11 +19,12 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+chrome_exec = os.environ.get("GOOGLE_CHROME_BIN", "chromedriver")
 chrome_options = Options()
-chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN', None)
+# chrome_options.binary_location = os.environ.get('GOOGLE_CHROME_BIN', None)
 chrome_options.add_argument("--window-size=1024x768")
 chrome_options.add_argument("--headless")
-driver = webdriver.Chrome(executable_path = "chromedriver", chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path = chrome_exec, chrome_options=chrome_options)
 #####
 
 
