@@ -12,8 +12,12 @@ from flask import request
 from googletrans import Translator
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
+<<<<<<< Updated upstream
 import os
 
+=======
+from duckduckpy import query
+>>>>>>> Stashed changes
 # For selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
@@ -67,6 +71,9 @@ def remove_parentheses(content):
 	return clean_content
 
 def shrink_content(content):
+	if length(content <= 160):
+		return content
+
 	char_limit = 160
 	# last_period = content[:char_limit].rfind('.')
 	last_purna_viram = content[:char_limit].rfind('\u0964')
@@ -75,6 +82,10 @@ def shrink_content(content):
 		last_purna_viram = char_limit - 1
 
 	return content[:last_purna_viram + 1]
+
+def search_duckduckgo(query):
+	response = query(query, container="dict")['abstract']
+	return response
 
 def search_wikipedia(search_word):
 	top_result = wikipedia.search(search_word)[0]
@@ -120,25 +131,30 @@ def ask_google(query):
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	to_search_english = translate_to_english(cleaned)
-	to_search_english = to_search_english + ' .'
+	info = search_duckduckgo(to_search_english)
+	if not info:
+		print("ask_google: " + ask_google(to_search_english))
+		info = ask_google(to_search_english)
 
-	print('to_search_english: ' + to_search_english)
+		if not info:
+			try:
+				to_search_english = to_search_english + ' .'
+				print('to_search_english: ' + to_search_english)
+				to_search = get_named_entity(to_search_english)[0]
+			except:
+				to_search = to_search_english
 
-	print("ask_google: " + ask_google(to_search_english))
+			print('to_search: ' + to_search)
 
-	try:
-		to_search = get_named_entity(to_search_english)[0]
-	except:
-		to_search = to_search_english
+			try:
+				info_in_hindi = search_hindi_wikipedia(to_search)
+			except wikipedia.exceptions.PageError:
+				try:
+					info = search_wikipedia(to_search)
+				except wikipedia.exceptions.PageError:
+					info = "No answer found"
 
-	print('to_search: ' + to_search)
-
-	try:
-		info_in_hindi = search_hindi_wikipedia(to_search)
-	except wikipedia.exceptions.PageError:
-		info = search_wikipedia(to_search)
-		info_in_hindi = translate_to_hindi(info)
-
+	info_in_hindi = translate_to_hindi(info)
 	# print("Before shrinking: " + info_in_hindi) 
 	info_in_hindi = remove_parentheses(shrink_content(info_in_hindi))
 	# print("After shrinking: " + info_in_hindi) 
