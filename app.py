@@ -17,10 +17,14 @@ from nltk.tree import Tree
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+
+GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google-chrome'
+CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
 chrome_options = Options()
+chrome_options.binary_location = GOOGLE_CHROME_BIN
 chrome_options.add_argument("--window-size=1024x768")
 chrome_options.add_argument("--headless")
-driver = webdriver.Chrome(chrome_options=chrome_options)
+driver = webdriver.Chrome(executable_path = CHROMEDRIVER_PATH, chrome_options=chrome_options)
 #####
 
 
