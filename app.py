@@ -103,16 +103,9 @@ def translate_to_english(info):
 	return info_in_english.text
 
 def ask_google(query):
-
-	# Search for query
 	query = query.replace(' ', '+')
-
 	driver.get('http://www.google.com/search?q=' + query)
-
-	# Get text from Google answer box
-
 	answer = driver.execute_script( "return document.elementFromPoint(arguments[0], arguments[1]);", 350, 230).text
-
 	return answer
 
 
