@@ -12,12 +12,8 @@ from flask import request
 from googletrans import Translator
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
-<<<<<<< Updated upstream
-import os
 
-=======
 from duckduckpy import query
->>>>>>> Stashed changes
 # For selenium
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
