@@ -1,7 +1,6 @@
 #!/usr/bin/env python
  
 # from urllib.parse import parse
-# restarting
 import urllib.request
 import urllib.parse
 import json
@@ -194,5 +193,3 @@ if __name__ == "__main__":
 # 	messages = json.loads(messages_bytes.decode('utf8').replace("'", '"'))
 
 # 	print(messages)
-# 	return
-# reruning app
