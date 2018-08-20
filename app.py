@@ -66,7 +66,7 @@ def remove_parentheses(content):
 	return clean_content
 
 def shrink_content(content):
-	if length(content <= 160):
+	if len(content) <= 160:
 		return content
 
 	char_limit = 160
