@@ -78,8 +78,8 @@ def shrink_content(content):
 
 	return content[:last_purna_viram + 1]
 
-def search_duckduckgo(query):
-	response = query(query, container="dict")['abstract']
+def search_duckduckgo(search_word):
+	response = query(search_word, container="dict")['abstract']
 	return response
 
 def search_wikipedia(search_word):
