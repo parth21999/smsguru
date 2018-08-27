@@ -24,7 +24,7 @@ chrome_options.binary_location =chrome_bin
 chrome_options.add_argument("--window-size=1024x768")
 chrome_options.add_argument("--headless")
 driver = webdriver.Chrome(executable_path = "chromedriver", chrome_options=chrome_options)
-#####
+
 
 
 app = Flask(__name__)
