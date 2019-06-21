@@ -1,5 +1,5 @@
 #!/usr/bin/env python
- 
+# Deploying
 # from urllib.parse import parse
 import urllib.request
 import urllib.parse
@@ -53,14 +53,14 @@ def get_named_entity(text):
 	return continuous_chunk
 
 def sendSMS(numbers, sender, message):
-	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1', 
+	data =  urllib.parse.urlencode({'username': 'parth21999@gmail.com', 'password': 'Partharjun1',
 		'numbers': numbers, 'message' : message, 'sender': sender, 'unicode':'true'})
 	data = data.encode('utf-8')
 	request = urllib.request.Request("https://api.textlocal.in/send/?")
 	f = urllib.request.urlopen(request, data)
 	fr = f.read()
 	return(fr)
-	
+
 def remove_parentheses(content):
 	clean_content = re.sub(r'\([^)]*\)', '', content)
 	clean_content = re.sub(r'\[[^)]*\]', '', clean_content)
@@ -116,7 +116,7 @@ def ask_google(query):
 	return answer
 
 
-	
+
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	to_search_english = translate_to_english(cleaned)
@@ -144,9 +144,9 @@ def get_info(sms_content):
 					info = "No answer found"
 
 	info_in_hindi = translate_to_hindi(info)
-	# print("Before shrinking: " + info_in_hindi) 
+	# print("Before shrinking: " + info_in_hindi)
 	info_in_hindi = remove_parentheses(shrink_content(info_in_hindi))
-	# print("After shrinking: " + info_in_hindi) 
+	# print("After shrinking: " + info_in_hindi)
 	return info_in_hindi
 
 @app.route('/', methods=["GET", "POST"])
