@@ -18,6 +18,7 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
 
+# Setting up for google query
 chrome_bin = os.environ.get('GOOGLE_CHROME_SHIM', None)
 chrome_options = Options()
 chrome_options.binary_location =chrome_bin
