@@ -119,8 +119,10 @@ def ask_google(query):
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
-	to_search_english = translate_to_english(cleaned)
-	info = search_duckduckgo(to_search_english)
+	#to_search_english = translate_to_english(cleaned)
+	#info = search_duckduckgo(to_search_english)
+	info = search_duckduckgo(cleaned)
+	"""
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
 		info = ask_google(to_search_english)
@@ -147,7 +149,8 @@ def get_info(sms_content):
 	# print("Before shrinking: " + info_in_hindi)
 	info_in_hindi = remove_parentheses(shrink_content(info_in_hindi))
 	# print("After shrinking: " + info_in_hindi)
-	return info_in_hindi
+	"""
+	return info
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
@@ -158,7 +161,7 @@ def main_route():
 
 		info_to_send = get_info(content)
 
-		# print(sender_number)
+		print(content)
 
 		if(int(credits) > 0):
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
@@ -169,11 +172,6 @@ def main_route():
 
 if __name__ == "__main__":
 	app.run()
-
-
-
-
-
 
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
