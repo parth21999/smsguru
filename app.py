@@ -137,7 +137,7 @@ def shrink_content(content):
 
 def summerize_content(search_url):
 	url = "https://api.meaningcloud.com/summarization-1.0"
-	payload = "key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=3&url=" + search_url
+	payload = "key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=2&url=" + search_url
 	headers = {'content-type': 'application/x-www-form-urlencoded'}
 	response = requests.request("POST", url, data=payload, headers=headers)
 	return response.text
@@ -193,31 +193,27 @@ def ask_google(query):
 '''
 
 def get_google_results(search_word):
-	return [result for result in search(search_words, stop=5)]
+	return [result for result in search(search_word, stop=5)]
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
-
 	#to_search_english = translate_to_english(cleaned)
 	#info = search_duckduckgo(to_search_english)
 	info = search_duckduckgo(cleaned)
-	'''
-	if (len(info) == 0):
+	if info:
 		try:
 			wiki_page = get_wikipedia_page(cleaned)
-			info = summerize_content(wiki_page)
+			info = json.loads(summerize_content(wiki_page))['summary']
 		except wikipedia.exceptions.PageError:
-			info_found = False
 			for result in get_google_results(cleaned):
-				info = summerize_content(result)
+				info = json.loads(summerize_content(result))['summary']
 				if (len(info) != 0):
 					info_found = True
 					break
-			if info_found:
-				return info
-			else:
-				return "No Information Found"
-	'''
+	if info:
+		return info
+	else:
+		return "No Information Found"
 '''
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
@@ -264,10 +260,11 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-
+'''
 if __name__ == "__main__":
 	app.run()
-
+'''
+print(get_info("fifa"))
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
 # 	data = data.encode('utf-8')
