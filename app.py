@@ -260,11 +260,10 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-'''
+	
 if __name__ == "__main__":
 	app.run()
-'''
-print(get_info("fifa"))
+
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
 # 	data = data.encode('utf-8')
