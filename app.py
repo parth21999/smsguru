@@ -200,20 +200,25 @@ def get_info(sms_content):
 	#to_search_english = translate_to_english(cleaned)
 	#info = search_duckduckgo(to_search_english)
 	info = search_duckduckgo(cleaned)
-	if info:
+	print("ddg result:", info)
+	if (len(info) == 0):
 		try:
+			print("in try")
 			wiki_page = get_wikipedia_page(cleaned)
 			info = json.loads(summerize_content(wiki_page))['summary']
+			print("wiki info:", info)
 		except wikipedia.exceptions.PageError:
 			for result in get_google_results(cleaned):
 				info = json.loads(summerize_content(result))['summary']
 				if (len(info) != 0):
 					info_found = True
 					break
-	if info:
+	if (len(info) != 0):
 		return info
 	else:
 		return "No Information Found"
+
+print(get_info("where is sri lanka"))
 '''
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
@@ -260,10 +265,10 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-	
+'''
 if __name__ == "__main__":
 	app.run()
-
+'''
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
 # 	data = data.encode('utf-8')
