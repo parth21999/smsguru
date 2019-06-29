@@ -199,14 +199,11 @@ def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#to_search_english = translate_to_english(cleaned)
 	#info = search_duckduckgo(to_search_english)
-	info = search_duckduckgo(cleaned)
-	print("ddg result:", info)
+	info = search_duckduckgo(cleaned))
 	if (len(info) == 0):
 		try:
-			print("in try")
 			wiki_page = get_wikipedia_page(cleaned)
 			info = json.loads(summerize_content(wiki_page))['summary']
-			print("wiki info:", info)
 		except wikipedia.exceptions.PageError:
 			for result in get_google_results(cleaned):
 				info = json.loads(summerize_content(result))['summary']
@@ -263,7 +260,7 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-# restart 
+# restart
 if __name__ == "__main__":
 	app.run()
 # def getInboxes(apikey):
