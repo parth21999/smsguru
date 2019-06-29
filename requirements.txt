@@ -21,7 +21,6 @@ Werkzeug==0.14.1
 wikipedia==1.4.0
 nltk==3.3.0
 duckduckpy==0.2
-selenium==3.14.0
 rake-nltk==1.0.4
 google==2.0.2
 truecase==0.0.4
