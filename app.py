@@ -217,7 +217,7 @@ def get_info(sms_content):
 			else:
 				return "No Information Found"
 
-''''
+'''
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
 		info = ask_google(to_search_english)
@@ -244,8 +244,7 @@ def get_info(sms_content):
 	# print("Before shrinking: " + info_in_hindi)
 	info_in_hindi = remove_parentheses(shrink_content(info_in_hindi))
 	# print("After shrinking: " + info_in_hindi)
-''''
-	return info
+'''
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
