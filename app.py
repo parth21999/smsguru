@@ -263,7 +263,7 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-	
+# restart 
 if __name__ == "__main__":
 	app.run()
 # def getInboxes(apikey):
