@@ -201,6 +201,7 @@ def get_info(sms_content):
 	#to_search_english = translate_to_english(cleaned)
 	#info = search_duckduckgo(to_search_english)
 	info = search_duckduckgo(cleaned)
+	'''
 	if (len(info) == 0):
 		try:
 			wiki_page = get_wikipedia_page(cleaned)
@@ -216,7 +217,7 @@ def get_info(sms_content):
 				return info
 			else:
 				return "No Information Found"
-
+	'''
 '''
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
