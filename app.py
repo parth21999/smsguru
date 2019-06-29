@@ -217,8 +217,6 @@ def get_info(sms_content):
 		return info
 	else:
 		return "No Information Found"
-
-print(get_info("where is sri lanka"))
 '''
 	if not info:
 		print("ask_google: " + ask_google(to_search_english))
@@ -265,10 +263,9 @@ def main_route():
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "hello world!!!"
-'''
+	
 if __name__ == "__main__":
 	app.run()
-'''
 # def getInboxes(apikey):
 # 	data =  urllib.parse.urlencode({'apikey': apikey})
 # 	data = data.encode('utf-8')
