@@ -245,7 +245,7 @@ def get_info(sms_content):
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
-	print("online")
+	print("online ")
 	if request.method == "POST":
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
