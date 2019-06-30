@@ -199,7 +199,7 @@ def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#to_search_english = translate_to_english(cleaned)
 	#info = search_duckduckgo(to_search_english)
-	info = search_duckduckgo(cleaned))
+	info = search_duckduckgo(cleaned)
 	if (len(info) == 0):
 		try:
 			wiki_page = get_wikipedia_page(cleaned)
