@@ -197,21 +197,22 @@ def get_google_results(search_word):
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
-	#to_search_english = translate_to_english(cleaned)
-	#info = search_duckduckgo(to_search_english)
-	info = search_duckduckgo(cleaned)
+	cleaned = check_spellings(cleaned)
+	to_search = get_keywords(cleaned)
+	print("search words:", to_search)
+	info = search_duckduckgo(to_search)
 	if (len(info) == 0):
 		try:
-			wiki_page = get_wikipedia_page(cleaned)
+			wiki_page = get_wikipedia_page(to_search)
 			info = json.loads(summerize_content(wiki_page))['summary']
 		except wikipedia.exceptions.PageError:
-			for result in get_google_results(cleaned):
+			for result in get_google_results(to_search):
 				info = json.loads(summerize_content(result, 3))['summary']
 				if (len(info) != 0):
 					info_found = True
 					break
 	if (len(info) != 0):
-		return info
+		return clean_content(info)
 	else:
 		return "No Information Found"
 '''
