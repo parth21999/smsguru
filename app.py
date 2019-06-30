@@ -197,7 +197,7 @@ def get_google_results(search_word):
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
-	cleaned = check_spellings(cleaned)
+	#cleaned = check_spellings(cleaned)
 	to_search = get_keywords(cleaned)
 	print("search words:", to_search)
 	info = search_duckduckgo(to_search)
