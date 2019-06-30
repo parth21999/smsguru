@@ -135,7 +135,7 @@ def shrink_content(content):
 	return content[:last_purna_viram + 1]
 '''
 
-def summerize_content(search_url):
+def summerize_content(search_url, sentences=1):
 	url = "https://api.meaningcloud.com/summarization-1.0"
 	payload = "key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=2&url=" + search_url
 	headers = {'content-type': 'application/x-www-form-urlencoded'}
@@ -206,7 +206,7 @@ def get_info(sms_content):
 			info = json.loads(summerize_content(wiki_page))['summary']
 		except wikipedia.exceptions.PageError:
 			for result in get_google_results(cleaned):
-				info = json.loads(summerize_content(result))['summary']
+				info = json.loads(summerize_content(result, 3))['summary']
 				if (len(info) != 0):
 					info_found = True
 					break
