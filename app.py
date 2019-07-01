@@ -191,7 +191,6 @@ def ask_google(query):
 	answer = driver.execute_script( "return document.elementFromPoint(arguments[0], arguments[1]);", 350, 230).text
 	return answer
 '''
-
 def get_google_results(search_word):
 	return [result for result in search(search_word, stop=5)]
 
@@ -211,6 +210,7 @@ def get_info(sms_content):
 				if (len(info) != 0):
 					info_found = True
 					break
+	print("info:", info)
 	if (len(info) != 0):
 		return clean_content(info)
 	else:
