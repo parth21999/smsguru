@@ -212,7 +212,7 @@ def get_info(sms_content):
 					break
 	print("info:", info)
 	if (len(info) != 0):
-		return clean_content(info)
+		return clean_content(info)[:200]
 	else:
 		return "No Information Found"
 '''
