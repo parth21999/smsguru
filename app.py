@@ -66,7 +66,7 @@ def reduce_content(content):
 	max_length = len(content) - 1
 	if (len(content) > 150):
 		max_length = 150
-	for i in range(max_length, 0, -1):
+	for i in range(max_length, max_length - 20, -1):
 		print(i)
 		if content[i] == " " and not space_found:
 			space_found = True
