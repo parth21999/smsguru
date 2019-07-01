@@ -67,7 +67,6 @@ def reduce_content(content):
 	if (len(content) > 150):
 		max_length = 150
 	for i in range(max_length, max_length - 20, -1):
-		print(i)
 		if content[i] == " " and not space_found:
 			space_found = True
 			last_space = i
@@ -262,23 +261,25 @@ def get_info(sms_content):
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
-	print("online ")
+	query_count = 0
+	user_count = 0
+	users = set()
 	if request.method == "POST":
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
 		credits = request.form.get('credits')
-
+		query_count += 1
+		users.add(sender_number)
+		user_count = len(users)
 		info_to_send = get_info(content)
-
 		print(content)
-
 		if(int(credits) > 0):
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
 			print("Response: " + send_resp)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
-	return "hello world!!!"
-# restart
+	return 'Number of queries made: {}\n Number of users: {}'.format(query_count, user_count)
+
 if __name__ == "__main__":
 	app.run()
 # def getInboxes(apikey):
