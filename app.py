@@ -58,6 +58,23 @@ def get_named_entity(text):
 				continue
 	return continuous_chunk
 '''
+
+def reduce_content(content):
+	punctuations = [".", ",", "!", "?", ":", ";"]
+	last_space = 0
+	space_found = False
+	max_length = len(content) - 1
+	if (len(content) > 150):
+		max_length = 150
+	for i in range(max_length, 0, -1):
+		print(i)
+		if content[i] == " " and not space_found:
+			space_found = True
+			last_space = i
+		if content[i] in punctuations:
+			return content[:(i+1)]
+	return content[:last_space]
+
 def get_named_entity(text):
     try:
         words = word_tokenize(text)
@@ -210,9 +227,8 @@ def get_info(sms_content):
 				if (len(info) != 0):
 					info_found = True
 					break
-	print("info:", info)
 	if (len(info) != 0):
-		return clean_content(info)[:200]
+		return reduce_content(clean_content(info))
 	else:
 		return "No Information Found"
 '''
