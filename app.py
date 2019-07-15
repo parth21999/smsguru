@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 # Deploying again
 # from urllib.parse import parse
 import urllib.request
@@ -68,8 +68,10 @@ def sendSMS(numbers, sender, message):
 	return(fr)
 
 def clean_content(content):
+	# removing bracket content
 	clean_content = re.sub(r'\([^)]*\)', '', content)
 	clean_content = re.sub(r'\[[^)]*\]', '', clean_content)
+	# removing urls 
 	clean_content = re.sub(r'(https|http)?:\/\/(\w|\.|\/|\?|\=|\&|\%)*\b', '', clean_content, flags=re.MULTILINE)
 	return clean_content
 
@@ -126,11 +128,17 @@ def correct_case(text):
 	return truecase.get_true_case(text)
 
 def get_google_results(search_word):
-	return [result for result in search(search_word, stop=5)]
+	results = []
+	# removing youtube urls
+	for result in search(search_word, stop=10):
+		print(result)
+		if not re.match(r"https://www.youtube", result):
+			results.append(result)
+	return results 
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
-	#cleaned = check_spellings(cleaned)
+	cleaned = check_spellings(cleaned)
 	to_search = get_keywords(cleaned)
 	print("search words:", to_search)
 	info = search_duckduckgo(to_search)
