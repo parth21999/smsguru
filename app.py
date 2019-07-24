@@ -30,7 +30,7 @@ keyword = '7B3D9'
 def updateDatabase(phoneNumber, query):
 	# connector setup
 	my_db = mysql.connect(
-		host="localhost",
+		host="119.82.95.216:3306",
 		user="root",
 		password="partharjun2002",
 		database="SMSGuru"
