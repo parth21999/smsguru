@@ -20,10 +20,27 @@ import requests
 from googlesearch import search
 # for case correction
 import truecase
+# for database integration
+import mysql.connector as mysql
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
+
+def updateDatabase(phoneNumber, query):
+	# connector setup
+	my_db = mysql.connect(
+		host="localhost",
+		user="root",
+		password="partharjun2002",
+		database="SMSGuru"
+	)
+	my_cursor = my_db.cursor()
+	# Checking if number exists in database
+	search_results = my_cusrsor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber))
+	if len(search_results) == 0:
+		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
+		my_cursor.execute(SQL_formula, (phoneNumber))
 
 def reduce_content(content):
 	punctuations = [".", ",", "!", "?", ":", ";"]
@@ -165,11 +182,8 @@ def main_route():
 	if request.method == "POST":
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
+		updateDatabase(sender_number, content)
 		credits = request.form.get('credits')
-		print(query_count)
-		query_count += 1
-		users.add(sender_number)
-		user_count = len(users)
 		info_to_send = get_info(content)
 		print(content)
 		if(int(credits) > 0):
