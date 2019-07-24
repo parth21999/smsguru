@@ -37,10 +37,10 @@ def updateDatabase(phoneNumber, query):
 	)
 	my_cursor = my_db.cursor()
 	# Checking if number exists in database
-	search_results = my_cusrsor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber))
+	search_results = my_cursor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber,))
 	if len(search_results) == 0:
 		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
-		my_cursor.execute(SQL_formula, (phoneNumber))
+		my_cursor.execute(SQL_formula, (phoneNumber,))
 
 def reduce_content(content):
 	punctuations = [".", ",", "!", "?", ":", ";"]
@@ -176,9 +176,6 @@ def get_info(sms_content):
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
-	query_count = 0
-	user_count = 0
-	users = set()
 	if request.method == "POST":
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
@@ -191,7 +188,7 @@ def main_route():
 			print("Response: " + send_resp)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
-	return 'Number of queries made: {}\n Number of users: {}'.format(query_count, user_count)
+	return "Hello world"
 
 if __name__ == "__main__":
 	app.run()

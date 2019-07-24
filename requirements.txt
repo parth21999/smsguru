@@ -25,3 +25,4 @@ rake-nltk==1.0.4
 google==2.0.2
 truecase==0.0.4
 requests==2.22.0
+mysql-connector-python==8.0.17
