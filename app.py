@@ -21,32 +21,29 @@ from googlesearch import search
 # for case correction
 import truecase
 # for database integration
-import mysql.connector as mysql
-
+#import mysql.connector as mysql
+from flask.ext.mysql import MySQL
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
+mysql = MySQL()
 
-database = None
-cursor = None
-def connect_database():
-	print("connecting to DB")
-	database = mysql.connect( 
-		host="119.82.95.216", 
-		port=3306,
-		user="root",
-		password="partharjun2002",
-		database="SMSGuru"
-	)
-	cursor = database.cursor()
-	print("connected")
+app.config['MYSQL_DATABASE_USER'] = 'root'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'partharjun2002'
+app.config['MYSQL_DATABASE_DB'] = 'SMSGuru'
+app.config['MYSQL_DATABASE_HOST'] = '119.82.95.216'
+mysql.init_app(app)
+conn = mysql.connect()
+cursor = conn.cursor()
 
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
+	print("updating DB")
 	search_results = cursor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber,))
 	if len(search_results) == 0:
 		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
 		cursor.execute(SQL_formula, (phoneNumber,))
+	conn.commit()
 
 def reduce_content(content):
 	punctuations = [".", ",", "!", "?", ":", ";"]
