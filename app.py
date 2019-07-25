@@ -33,12 +33,13 @@ def connect_database():
 	print("connecting to DB")
 	database = mysql.connect( 
 		host="119.82.95.216", 
-		port=3306
+		port=3306,
 		user="root",
 		password="partharjun2002",
 		database="SMSGuru"
 	)
 	cursor = database.cursor()
+	print("connected")
 
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
