@@ -33,6 +33,7 @@ def connect_database():
 	print("connecting to DB")
 	database = mysql.connect( 
 		host="119.82.95.216", 
+		port=3306
 		user="root",
 		password="partharjun2002",
 		database="SMSGuru"
