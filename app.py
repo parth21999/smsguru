@@ -183,7 +183,6 @@ def main_route():
 		print("query received")
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
-		connect_database()
 		update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
