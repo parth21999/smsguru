@@ -177,6 +177,7 @@ def get_info(sms_content):
 @app.route('/', methods=["GET", "POST"])
 def main_route():
 	if request.method == "POST":
+		print("query received")
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
 		updateDatabase(sender_number, content)
