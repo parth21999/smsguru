@@ -21,7 +21,7 @@ from googlesearch import search
 # for case correction
 import truecase
 # for database integration
-import MySQLdb.connector as mysql
+import mysql.connector as mysql
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
@@ -154,7 +154,7 @@ def get_google_results(search_word):
 	results = []
 	# removing youtube urls
 	for result in search(search_word, stop=10):
-		print(result)
+		print("google search result", result)
 		if not re.match(r"https://www.youtube", result):
 			results.append(result)
 	return results 
