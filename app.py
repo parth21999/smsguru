@@ -22,7 +22,7 @@ from googlesearch import search
 import truecase
 # for database integration
 #import mysql.connector as mysql
-from flask.ext.mysql import MySQL
+from flask_mysql import MySQL
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
