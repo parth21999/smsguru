@@ -21,7 +21,7 @@ from googlesearch import search
 # for case correction
 import truecase
 # for database integration
-import mysql.connector as mysql
+import MySQLdb.connector as mysql
 
 app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
