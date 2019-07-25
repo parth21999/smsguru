@@ -27,20 +27,24 @@ app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
 
-def updateDatabase(phoneNumber, query):
-	# connector setup
-	my_db = mysql.connect(
-		host="119.82.95.216",
+database = None
+cursor = None
+def connect_database():
+	print("connecting to DB")
+	database = mysql.connect( 
+		host="119.82.95.216", 
 		user="root",
 		password="partharjun2002",
 		database="SMSGuru"
 	)
-	my_cursor = my_db.cursor()
+	cursor = database.cursor()
+
+def update_database(phoneNumber, query):
 	# Checking if number exists in database
-	search_results = my_cursor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber,))
+	search_results = cursor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber,))
 	if len(search_results) == 0:
 		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
-		my_cursor.execute(SQL_formula, (phoneNumber,))
+		cursor.execute(SQL_formula, (phoneNumber,))
 
 def reduce_content(content):
 	punctuations = [".", ",", "!", "?", ":", ";"]
@@ -180,7 +184,8 @@ def main_route():
 		print("query received")
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
-		updateDatabase(sender_number, content)
+		connect_database()
+		update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
 		print(content)
