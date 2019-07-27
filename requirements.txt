@@ -28,3 +28,4 @@ requests==2.22.0
 Flask-MySQL==1.4.0
 mysql-connector-python==8.0.17
 googletrans==2.4.0
+readability-lxml==0.7.1
