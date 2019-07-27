@@ -66,9 +66,9 @@ def check_spellings(text):
 	print(corrections)
 	print(ne_indexes)
 
-def summerize_content(search_url, sentences=1):
+def summerize_content(text, sentences=1):
 	url = "https://api.meaningcloud.com/summarization-1.0"
-	payload = "key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=2&url=" + search_url
+	payload = f"key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=2&txt={text}" 
 	headers = {'content-type': 'application/x-www-form-urlencoded'}
 	response = requests.request("POST", url, data=payload, headers=headers)
 	return response.text
