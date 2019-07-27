@@ -16,7 +16,7 @@ import os
 # miscellanous
 import json
 import wikipedia
-
+import pickle
 # for database integration
 #import mysql.connector as mysql
 from flaskext.mysql import MySQL
@@ -87,8 +87,8 @@ def main_route():
 	if request.method == "POST":
 		print("query received")
 		f = open('request.txt', 'w')
-		f.write(request)
-		f.close
+		pickle.dump(request, f)
+		f.close()
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
 		#update_database(sender_number, content)
