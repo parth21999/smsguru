@@ -24,20 +24,21 @@ import truecase
 #import mysql.connector as mysql
 from flaskext.mysql import MySQL
 app = Flask(__name__)
-apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
-keyword = '7B3D9'
+'''
 mysql = MySQL()
 
 app.config['MYSQL_DATABASE_USER'] = 'root'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'partharjun2002'
 app.config['MYSQL_DATABASE_DB'] = 'SMSGuru'
-app.config['MYSQL_DATABASE_HOST'] = 'localhost'
-app.config['MYSQL_DATABASE_PORT'] = 3306
+app.config['MYSQL_DATABASE_HOST'] = '119.82.95.216'
+
 
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
-
+'''
+apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
+keyword = '7B3D9'
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
@@ -185,7 +186,7 @@ def main_route():
 		print("query received")
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
-		update_database(sender_number, content)
+		#update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
 		print(content)
