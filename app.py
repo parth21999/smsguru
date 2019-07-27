@@ -155,7 +155,7 @@ def correct_case(text):
 def get_google_results(search_word):
 	results = []
 	# removing youtube urls
-	for result in search(search_word, stop=10):
+	for result in search(search_word, stop=5):
 		print("google search result", result)
 		if not re.match(r"https://www.youtube", result):
 			results.append(result)
