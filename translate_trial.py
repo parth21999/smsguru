@@ -15,14 +15,5 @@ translation = translator.translate(text)
 print(keywords)
 print(translation)
 '''
-
-def remove_youtube_results(results):
-    final_results = []
-    for result in results: 
-        if not re.match(r"https://www.youtube.com", result):
-            final_results.append(result)
-    return final_results
-
-results = ['a', 'b', 'c', 'https://www.youtube.com/watch v=Y8Aliq-ZbZk']
-print(remove_youtube_results(results))
-
+let = 'abc'
+print('abc' == 'abc')

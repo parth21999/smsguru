@@ -23,6 +23,7 @@ import truecase
 # for database integration
 #import mysql.connector as mysql
 from flaskext.mysql import MySQL
+from googletrans import Translator
 app = Flask(__name__)
 '''
 mysql = MySQL()
@@ -39,6 +40,7 @@ cursor = conn.cursor()
 '''
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
+'''
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
@@ -47,7 +49,7 @@ def update_database(phoneNumber, query):
 		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
 		cursor.execute(SQL_formula, (phoneNumber,))
 	conn.commit()
-
+'''
 def reduce_content(content):
 	punctuations = [".", ",", "!", "?", ":", ";"]
 	last_space = 0
@@ -159,26 +161,39 @@ def get_google_results(search_word):
 			results.append(result)
 	return results 
 
+# For detecting query language
+def detect_language(text):
+	translator = Translator()
+	lang = translator.detect(text).lang
+	return lang
+
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#cleaned = check_spellings(cleaned)
-	to_search = get_keywords(cleaned)
-	print("search words:", to_search)
-	info = search_duckduckgo(to_search)
-	if (len(info) == 0):
-		try:
-			wiki_page = get_wikipedia_page(to_search)
-			info = json.loads(summerize_content(wiki_page))['summary']
-		except wikipedia.exceptions.PageError:
-			for result in get_google_results(to_search):
+	query_lang = detect_language(sms_content)
+	if query_lang == 'hi':
+		for result in get_google_results(cleaned):
 				info = json.loads(summerize_content(result, 3))['summary']
 				if (len(info) != 0):
-					info_found = True
 					break
+	else:
+		to_search = get_keywords(cleaned)
+		print("search words:", to_search)
+		info = search_duckduckgo(to_search)
+		if (len(info) == 0):
+			try:
+				wiki_page = get_wikipedia_page(to_search)
+				info = json.loads(summerize_content(wiki_page))['summary']
+			except wikipedia.exceptions.PageError:
+				for result in get_google_results(to_search):
+					info = json.loads(summerize_content(result, 3))['summary']
+					if (len(info) != 0):
+						break
 	if (len(info) != 0):
 		return reduce_content(clean_content(info))
 	else:
 		return "No Information Found"
+
 
 @app.route('/', methods=["GET", "POST"])
 def main_route():
