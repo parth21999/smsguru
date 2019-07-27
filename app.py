@@ -7,7 +7,7 @@ correct_case, detect_language)
 
 from textlocal_helpers import sendSMS
 # search helpers
-from search_helpers import (search_duckduckgo, get_google_results, get_wiki_page)
+from search_helpers import (search_duckduckgo, get_google_results, get_wiki_page, get_main_text)
 
 from flask import Flask
 from flask import request
@@ -56,7 +56,8 @@ def get_info(sms_content):
 	try:
 		if query_lang == 'hi':
 			for result in get_google_results(cleaned):
-					info = json.loads(summerize_content(result, 3))['summary']
+					main_text = get_main_text(result)
+					info = json.loads(summerize_content(main_text, 3))['summary']
 					if (len(info) != 0):
 						break
 		else:
@@ -66,10 +67,12 @@ def get_info(sms_content):
 			if (len(info) == 0):
 				try:
 					wiki_page = get_wiki_page(to_search)
-					info = json.loads(summerize_content(wiki_page))['summary']
+					main_text = get_main_text(wiki_page)
+					info = json.loads(summerize_content(main_text))['summary']
 				except wikipedia.exceptions.PageError:
 					for result in get_google_results(to_search):
-						info = json.loads(summerize_content(result, 3))['summary']
+						main_text = get_main_text(result)
+						info = json.loads(summerize_content(main_text, 3))['summary']
 						if (len(info) != 0):
 							break
 		if (len(info) != 0):
@@ -86,7 +89,7 @@ def get_info(sms_content):
 def main_route():
 	if request.method == "POST":
 		print("query received")
-		f = open('request.obj', 'w')
+		f = open('request.obj', 'wb')
 		pickle.dump(request, f)
 		f.close()
 		sender_number = request.form.get('sender')
