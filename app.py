@@ -86,8 +86,8 @@ def get_info(sms_content):
 def main_route():
 	if request.method == "POST":
 		print("query received")
-		f = open('request.txt', 'w')
-		pickle.dump(str(request), f)
+		f = open('request.obj', 'w')
+		pickle.dump(request, f)
 		f.close()
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
