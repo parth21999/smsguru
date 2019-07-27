@@ -53,28 +53,33 @@ def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#cleaned = check_spellings(cleaned)
 	query_lang = detect_language(sms_content)
-	if query_lang == 'hi':
-		for result in get_google_results(cleaned):
-				info = json.loads(summerize_content(result, 3))['summary']
-				if (len(info) != 0):
-					break
-	else:
-		to_search = get_keywords(cleaned)
-		print("search words:", to_search)
-		info = search_duckduckgo(to_search)
-		if (len(info) == 0):
-			try:
-				wiki_page = get_wiki_page(to_search)
-				info = json.loads(summerize_content(wiki_page))['summary']
-			except wikipedia.exceptions.PageError:
-				for result in get_google_results(to_search):
+	try:
+		if query_lang == 'hi':
+			for result in get_google_results(cleaned):
 					info = json.loads(summerize_content(result, 3))['summary']
 					if (len(info) != 0):
 						break
-	if (len(info) != 0):
-		return reduce_content(clean_content(info))
-	else:
-		return "No Information Found"
+		else:
+			to_search = get_keywords(cleaned)
+			print("search words:", to_search)
+			info = search_duckduckgo(to_search)
+			if (len(info) == 0):
+				try:
+					wiki_page = get_wiki_page(to_search)
+					info = json.loads(summerize_content(wiki_page))['summary']
+				except wikipedia.exceptions.PageError:
+					for result in get_google_results(to_search):
+						info = json.loads(summerize_content(result, 3))['summary']
+						if (len(info) != 0):
+							break
+		if (len(info) != 0):
+			return reduce_content(clean_content(info))
+		else:
+			return "No Information Found"
+	except Exception as e:
+		print(str(e))
+		return "Error occured"
+
 
 
 @app.route('/', methods=["GET", "POST"])
