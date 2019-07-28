@@ -4,6 +4,8 @@ from duckduckpy import query
 import re
 from readability import Document
 import requests
+import json
+from nlp_helpers import summerize_content
 def search_duckduckgo(search_word):
 	response = query(search_word, container="dict")['abstract']
 	return response
@@ -30,3 +32,17 @@ def get_main_text(url):
     re_text = " ".join(re.findall(re_form, text))
     print(re_text)
     return re_text
+
+def get_wiki_info(query):
+    wiki_page = get_wiki_page(query)
+    main_text = get_main_text(wiki_page)
+    info = json.loads(summerize_content(main_text))['summary']
+    return info 
+
+def get_google_info(query):
+    for result in get_google_results(query):
+        main_text = get_main_text(result)
+        info = json.loads(summerize_content(main_text, 3))['summary']
+        if (len(info) != 0):
+            break
+    return info

@@ -7,7 +7,7 @@ correct_case, detect_language)
 
 from textlocal_helpers import sendSMS
 # search helpers
-from search_helpers import (search_duckduckgo, get_google_results, get_wiki_page, get_main_text)
+from search_helpers import (search_duckduckgo, get_google_info, get_wiki_info)
 
 from flask import Flask
 from flask import request
@@ -54,27 +54,18 @@ def get_info(sms_content):
 	#cleaned = check_spellings(cleaned)
 	query_lang = detect_language(sms_content)
 	try:
+		info = ''
 		if query_lang == 'hi':
-			for result in get_google_results(cleaned):
-					main_text = get_main_text(result)
-					info = json.loads(summerize_content(main_text, 3))['summary']
-					if (len(info) != 0):
-						break
+			info = get_google_info(cleaned)
 		else:
 			to_search = get_keywords(cleaned)
 			print("search words:", to_search)
 			info = search_duckduckgo(to_search)
 			if (len(info) == 0):
 				try:
-					wiki_page = get_wiki_page(to_search)
-					main_text = get_main_text(wiki_page)
-					info = json.loads(summerize_content(main_text))['summary']
+					info = get_wiki_info(to_search)	
 				except wikipedia.exceptions.PageError:
-					for result in get_google_results(to_search):
-						main_text = get_main_text(result)
-						info = json.loads(summerize_content(main_text, 3))['summary']
-						if (len(info) != 0):
-							break
+					info = get_google_info(to_search)
 		if (len(info) != 0):
 			return reduce_content(clean_content(info))
 		else:
