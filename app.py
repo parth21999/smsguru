@@ -42,10 +42,10 @@ keyword = '7B3D9'
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
-	search_results = cursor.execute("SELECT * FROM users WHERE PhoneNumber = (%s)", (phoneNumber,))
+	search_results = cursor.execute("SELECT * FROM users WHERE PhoneNumber = (%s)", phoneNumber)
 	if len(search_results) == 0:
 		SQL_formula = "INSERT INTO users (PhoneNumber) VALUES (%s)"
-		cursor.execute(SQL_formula, (phoneNumber))
+		cursor.execute(SQL_formula, phoneNumber)
 	conn.commit()
 
 def get_info(sms_content):
