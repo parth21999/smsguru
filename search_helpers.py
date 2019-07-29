@@ -40,7 +40,13 @@ def get_wiki_info(query):
     return info 
 
 def get_google_info(query):
-    for result in get_google_results(query):
+    # moving wiki links ahead
+    results = get_google_results(query)
+    for result in results:
+        if (re.search('wikipedia', result)):
+            results.insert(0, results.pop(results.index(result)))
+
+    for result in results:
         main_text = get_main_text(result)
         info = json.loads(summerize_content(main_text, 3))['summary']
         if (len(info) != 0):

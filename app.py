@@ -23,31 +23,30 @@ from flaskext.mysql import MySQL
 from googletrans import Translator
 
 app = Flask(__name__)
-'''
+
 mysql = MySQL()
 
-app.config['MYSQL_DATABASE_USER'] = 'root'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'partharjun2002'
-app.config['MYSQL_DATABASE_DB'] = 'SMSGuru'
-app.config['MYSQL_DATABASE_HOST'] = '119.82.95.216'
+app.config['MYSQL_DATABASE_USER'] = 'b924e1cdd6d291'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'f01bb7f9'
+app.config['MYSQL_DATABASE_DB'] = 'heroku_152041f4e51b070'
+app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-02.cleardb.net'
 
 
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
-'''
+
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
-'''
+
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
-	search_results = cursor.execute("SELECT * FROM Users WHERE PhoneNumber = (%s)", (phoneNumber,))
+	search_results = cursor.execute("SELECT * FROM users WHERE PhoneNumber = (%s)", (phoneNumber,))
 	if len(search_results) == 0:
-		SQL_formula = "INSERT INTO Users (PhoneNumber) VALUES (%s)"
-		cursor.execute(SQL_formula, (phoneNumber,))
+		SQL_formula = "INSERT INTO users (PhoneNumber) VALUES (%s)"
+		cursor.execute(SQL_formula, (phoneNumber))
 	conn.commit()
-'''
 
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
@@ -80,12 +79,9 @@ def get_info(sms_content):
 def main_route():
 	if request.method == "POST":
 		print("query received")
-		f = open('request.obj', 'wb')
-		pickle.dump(request, f)
-		f.close()
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
-		#update_database(sender_number, content)
+		update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
 		print(content)
