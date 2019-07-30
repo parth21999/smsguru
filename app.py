@@ -26,10 +26,10 @@ app = Flask(__name__)
 
 mysql = MySQL()
 
-app.config['MYSQL_DATABASE_USER'] = 'b924e1cdd6d291'
-app.config['MYSQL_DATABASE_PASSWORD'] = 'f01bb7f9'
-app.config['MYSQL_DATABASE_DB'] = 'heroku_152041f4e51b070'
-app.config['MYSQL_DATABASE_HOST'] = 'us-cdbr-iron-east-02.cleardb.net'
+app.config['MYSQL_DATABASE_USER'] = 'sql12300194'
+app.config['MYSQL_DATABASE_PASSWORD'] = 'jkhL9weFyW'
+app.config['MYSQL_DATABASE_DB'] = 'sql12300194'
+app.config['MYSQL_DATABASE_HOST'] = ' sql12.freemysqlhosting.net'
 
 
 mysql.init_app(app)
