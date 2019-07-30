@@ -43,6 +43,7 @@ def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
 	search_results = cursor.execute("SELECT * FROM users WHERE PhoneNumber = (%s)", phoneNumber)
+	print(search_results)
 	if len(search_results) == 0:
 		SQL_formula = "INSERT INTO users (PhoneNumber) VALUES (%s)"
 		cursor.execute(SQL_formula, phoneNumber)
