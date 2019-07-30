@@ -29,7 +29,7 @@ mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'sql12300194'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'jkhL9weFyW'
 app.config['MYSQL_DATABASE_DB'] = 'sql12300194'
-app.config['MYSQL_DATABASE_HOST'] = ' sql12.freemysqlhosting.net'
+app.config['MYSQL_DATABASE_HOST'] = 'sql12.freemysqlhosting.net'
 
 
 mysql.init_app(app)
