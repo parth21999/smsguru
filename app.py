@@ -19,26 +19,23 @@ import wikipedia
 import pickle
 # for database integration
 #import mysql.connector as mysql
-from flaskext.mysql import MySQL
+#from flaskext.mysql import MySQL
 from googletrans import Translator
 
 app = Flask(__name__)
-
+'''
 mysql = MySQL()
-
 app.config['MYSQL_DATABASE_USER'] = 'sql12300194'
 app.config['MYSQL_DATABASE_PASSWORD'] = 'jkhL9weFyW'
 app.config['MYSQL_DATABASE_DB'] = 'sql12300194'
 app.config['MYSQL_DATABASE_HOST'] = 'sql12.freemysqlhosting.net'
-
-
 mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
-
+'''
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
-
+'''
 def update_database(phoneNumber, query):
 	# Checking if number exists in database
 	print("updating DB")
@@ -48,7 +45,7 @@ def update_database(phoneNumber, query):
 		SQL_formula = "INSERT INTO users (PhoneNumber) VALUES (%s)"
 		cursor.execute(SQL_formula, phoneNumber)
 	conn.commit()
-
+'''
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#cleaned = check_spellings(cleaned)
@@ -82,7 +79,7 @@ def main_route():
 		print("query received")
 		sender_number = request.form.get('sender')
 		content = request.form.get('content')
-		update_database(sender_number, content)
+		#update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
 		print(content)
