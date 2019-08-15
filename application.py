@@ -22,7 +22,7 @@ import pickle
 #from flaskext.mysql import MySQL
 from googletrans import Translator
 
-app = Flask(__name__)
+application = app = Flask(__name__)
 '''
 mysql = MySQL()
 app.config['MYSQL_DATABASE_USER'] = 'sql12300194'
@@ -82,7 +82,7 @@ def main_route():
 		#update_database(sender_number, content)
 		credits = request.form.get('credits')
 		info_to_send = get_info(content)
-		print(content)
+		print(info_to_send)
 		if(int(credits) > 0):
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
 			print("Response: " + send_resp)
