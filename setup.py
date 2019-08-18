@@ -19,7 +19,7 @@ setup(
         'Jinja2==2.10',
         'Markdown==2.6.11',
         'MarkupSafe==1.0',
-        'numpy==1.14.0',
+        'numpy==1.17.0',
         'olefile==0.44',
         'Pillow==4.3.0',
         'protobuf==3.5.1',
