@@ -1,13 +1,13 @@
 #/usr/bin/env python
 
 # nlp helper functions 
-from nlp_helpers import (reduce_content, get_keywords, clean_content, 
+from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, 
 check_spellings, summerize_content, clean_sms_content,
 correct_case, detect_language)
 
-from textlocal_helpers import sendSMS
+from App_files.textlocal_helpers import sendSMS
 # search helpers
-from search_helpers import (search_duckduckgo, get_google_info, get_wiki_info)
+from App_files.search_helpers import (search_duckduckgo, get_google_info, get_wiki_info)
 
 from flask import Flask
 from flask import request
