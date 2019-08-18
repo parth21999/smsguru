@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name="SMSGuru",
     version="0.1.0",
-    packages=find_packages(include=['App_files', 'App_files.*']),
+    packages=['App_files'],
     install_requires=[
         'absl-py==0.1.10',
         'astor==0.6.2',
