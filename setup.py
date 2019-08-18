@@ -14,7 +14,7 @@ setup(
         'gast==0.2.0',
         'grpcio==1.9.1',
         'gunicorn==19.9.0',
-        'html5lib==0.9999999'
+        'html5lib==0.9999999',
         'itsdangerous==0.24',
         'Jinja2==2.10',
         'Markdown==2.6.11',
