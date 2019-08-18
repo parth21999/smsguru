@@ -1,5 +1,4 @@
 #/usr/bin/env python
-
 # nlp helper functions 
 from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, 
 check_spellings, summerize_content, clean_sms_content,

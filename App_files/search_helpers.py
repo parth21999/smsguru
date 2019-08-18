@@ -5,7 +5,7 @@ import re
 from readability import Document
 import requests
 import json
-from nlp_helpers import summerize_content
+from App_files.nlp_helpers import summerize_content
 def search_duckduckgo(search_word):
 	response = query(search_word, container="dict")['abstract']
 	return response
