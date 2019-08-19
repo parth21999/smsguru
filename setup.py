@@ -4,6 +4,7 @@ setup(
     name="SMSGuru",
     version="0.1.0",
     packages=['App_files'],
+    include_package_data=True,
     install_requires=[
         'absl-py==0.1.10',
         'astor==0.6.2',
