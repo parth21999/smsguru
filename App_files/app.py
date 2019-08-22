@@ -83,6 +83,7 @@ def main_route():
 		info_to_send = get_info(content)
 		print(info_to_send)
 		if(int(credits) > 0):
+			print("SENDING RESPONSE")
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"')
 			print("Response: " + send_resp)
 
