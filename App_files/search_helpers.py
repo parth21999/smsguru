@@ -34,9 +34,7 @@ def get_main_text(url):
     return re_text
 
 def get_wiki_info(query):
-    wiki_page = get_wiki_page(query)
-    main_text = get_main_text(wiki_page)
-    info = json.loads(summerize_content(main_text))['summary']
+    info = wikipedia.summary(query=query, chars=200)
     return info 
 
 def get_google_info(query):
