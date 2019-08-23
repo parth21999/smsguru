@@ -74,5 +74,6 @@ if __name__ == "__main__":
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
+	app.logger.setLevel(logging.INFO)
 	app.logger.addHandler(handler)
 	app.run()
