@@ -63,6 +63,7 @@ def main_route():
 			print("Response: " + str(send_resp))
 			cur_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send},{send_resp["status"]}'
+			print(query_info)
 			app.logger.info(query_info)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
