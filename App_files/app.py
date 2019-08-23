@@ -62,7 +62,7 @@ def main_route():
 			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"').json()
 			print("Response: " + str(send_resp))
 			cur_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
-			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send},{send_resp['status']}'
+			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send}'
 			app.logger.info(query_info)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
