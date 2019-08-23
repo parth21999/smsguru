@@ -18,7 +18,7 @@ from googletrans import Translator
 # logging
 import logging
 import datetime
-import json
+
 application = app = Flask(__name__)
 apikey = 'A4mhT8jM+RY-ePSJWXB0P5pJuT5BzBBlVAumiqQiZJ'
 keyword = '7B3D9'
@@ -59,7 +59,7 @@ def main_route():
 		print(info_to_send)
 		if(int(credits) > 0):
 			print("Sending response")
-			send_resp = json.loads(sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"'))
+			send_resp = sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"').json()
 			print("Response: " + str(send_resp))
 			cur_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send},{send_resp['status']}'
