@@ -70,7 +70,7 @@ def main_route():
 	return "Hello world"
 
 if __name__ == "__main__":
-	handler = logging.FileHandler('usage_logs.log')
+	handler = logging.handlers.RotatingFileHandler('usage_logs.log', maxBytes=1024*1024, backupCount=10)
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
