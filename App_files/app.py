@@ -60,7 +60,7 @@ def main_route():
 		if(int(credits) > 0):
 			print("Sending response")
 			send_resp = json.loads(sendSMS(sender_number, 'TXTLCL', info_to_send).decode('utf8').replace("'", '"'))
-			print("Response: " + send_resp)
+			print("Response: " + str(send_resp))
 			cur_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send},{send_resp.status}'
 			app.logger.info(query_info)
