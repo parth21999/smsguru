@@ -69,7 +69,7 @@ def main_route():
 	return "Hello world"
 
 if __name__ == "__main__":
-	handler = logging.FileHandler('usage_logs.csv')
+	handler = logging.FileHandler('usage_logs.log')
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
