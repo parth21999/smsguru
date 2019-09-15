@@ -88,5 +88,5 @@ def detect_language(text):
 
 def hi_to_eng(text):
 	translator = Translator()
-	eng = translator.translate(text)
+	eng = translator.translate(text).text
 	return eng
