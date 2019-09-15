@@ -1,6 +1,6 @@
 # nlp helper functions 
 from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, 
-check_spellings, summerize_content, clean_sms_content,
+check_spellings, summerize_content, clean_sms_content, hi_to_eng
 correct_case, detect_language)
 # SMS helpers
 from App_files.textlocal_helpers import sendSMS
@@ -26,24 +26,27 @@ keyword = '7B3D9'
 def get_info(sms_content):
 	cleaned = clean_sms_content(sms_content)
 	#cleaned = check_spellings(cleaned)
-	query_lang = detect_language(sms_content)
+	query_lang = detect_language(cleaned)
 	try:
 		info = ''
 		if query_lang == 'hi':
-			info = get_google_info(cleaned)
-		else:
-			to_search = get_keywords(cleaned)
-			print("search words:", to_search)
-			info = search_duckduckgo(to_search)
-			if (len(info) == 0):
-				try:
-					info = get_wiki_info(to_search)	
-				except wikipedia.exceptions.PageError:
-					info = get_google_info(to_search)
+			cleaned = hi_to_eng(cleaned)
+			#info = get_google_info(cleaned)
+
+		to_search = get_keywords(cleaned)
+		print("search words:", to_search)
+		info = search_duckduckgo(to_search)
+		if (len(info) == 0):
+			try:
+				info = get_wiki_info(to_search)	
+			except wikipedia.exceptions.PageError:
+				info = get_google_info(to_search)
+
 		if (len(info) != 0):
 			return reduce_content(clean_content(info))
 		else:
 			return "No Information Found"
+			
 	except Exception as e:
 		print(str(e))
 		return "Error occured"
@@ -70,7 +73,7 @@ def main_route():
 	return "Hello world"
 
 if __name__ == "__main__":
-	handler = logging.handlers.RotatingFileHandler('usage_logs.log', maxBytes=1024*1024, backupCount=10)
+	handler = logging.handlers.RotatingFileHandler('usage.log', maxBytes=1024*1024, backupCount=10)
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
