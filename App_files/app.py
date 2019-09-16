@@ -16,7 +16,7 @@ import pickle
 from googletrans import Translator
 # logging
 import logging
-from logging import RotatingFileHandler
+from logging.handlers import RotatingFileHandler
 import datetime
 
 application = app = Flask(__name__)
