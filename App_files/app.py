@@ -16,6 +16,7 @@ import pickle
 from googletrans import Translator
 # logging
 import logging
+from logging import RotatingFileHandler
 import datetime
 
 application = app = Flask(__name__)
@@ -72,7 +73,7 @@ def main_route():
 	return "Hello world"
 
 if __name__ == "__main__":
-	handler = logging.handlers.RotatingFileHandler('usage.log', maxBytes=1024*1024, backupCount=10)
+	handler = RotatingFileHandler('usage.log', maxBytes=1024*1024, backupCount=10)
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
