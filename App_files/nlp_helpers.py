@@ -2,7 +2,6 @@ import re
 from nltk import ne_chunk, pos_tag, word_tokenize
 from nltk.tree import Tree
 from rake_nltk import Rake
-import truecase
 from googletrans import Translator
 import requests
 
@@ -49,6 +48,7 @@ def clean_content(content):
 	clean_content = re.sub(r'(https|http)?:\/\/(\w|\.|\/|\?|\=|\&|\%)*\b', '', clean_content, flags=re.MULTILINE)
 	return clean_content
 
+'''
 def check_spellings(text):
 	case_corrected = truecase.get_true_case(text)
 	named_entities = get_named_entity(text)
@@ -65,7 +65,7 @@ def check_spellings(text):
 		corrections.append((rspn['replacements'][0]['value'], rspn['offset']))
 	print(corrections)
 	print(ne_indexes)
-
+'''
 def summerize_content(text, sentences=1):
 	url = "https://api.meaningcloud.com/summarization-1.0"
 	payload = f"key=4b942c0c5d7c9c76c99ba727d2df9b66&sentences=2&txt={text}" 

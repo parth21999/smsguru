@@ -1,6 +1,6 @@
 # nlp helper functions 
 from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, 
-check_spellings, summerize_content, clean_sms_content, hi_to_eng, correct_case, detect_language)
+check_spellings, summerize_content, clean_sms_content, hi_to_eng, detect_language)
 # SMS helpers
 from App_files.textlocal_helpers import sendSMS
 # search helpers
@@ -16,7 +16,7 @@ import pickle
 from googletrans import Translator
 # logging
 import logging
-from logging.handlers import RotatingFileHandler
+#from logging.handlers import RotatingFileHandler
 import datetime
 
 application = app = Flask(__name__)
