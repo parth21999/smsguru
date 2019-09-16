@@ -1,6 +1,5 @@
 # nlp helper functions 
-from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, 
-check_spellings, summerize_content, clean_sms_content, hi_to_eng, detect_language)
+from App_files.nlp_helpers import (reduce_content, get_keywords, clean_content, summerize_content, clean_sms_content, hi_to_eng, detect_language)
 # SMS helpers
 from App_files.textlocal_helpers import sendSMS
 # search helpers
