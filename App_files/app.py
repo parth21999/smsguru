@@ -66,16 +66,18 @@ def main_route():
 			cur_datetime = datetime.datetime.now().strftime("%Y-%m-%d %H:%M")
 			query_info = f'{cur_datetime},{sender_number},{content},{info_to_send},{send_resp["status"]}'
 			print(query_info)
-			app.logger.info(query_info)
+			#app.logger.info(query_info)
 
 		# print("MESSAGE CONTENT: " + request.form.get('content'))
 	return "Hello world"
 
 if __name__ == "__main__":
+	'''
 	handler = RotatingFileHandler('usage.log', maxBytes=1024*1024, backupCount=10)
 	handler.setLevel(logging.INFO)
 	f_format = logging.Formatter('%(message)s')
 	handler.setFormatter(f_format)
 	app.logger.setLevel(logging.INFO)
 	app.logger.addHandler(handler)
+	'''
 	app.run()
