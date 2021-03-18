@@ -22,7 +22,7 @@ setup(
         'MarkupSafe==1.0',
         'numpy==1.17.0',
         'olefile==0.44',
-        'Pillow==6.1.0',
+        'Pillow==8.1.1',
         'protobuf==3.5.1',
         'six==1.11.0',
         'Werkzeug==0.14.1',
