@@ -17,7 +17,7 @@ setup(
         'gunicorn==19.9.0',
         'html5lib==0.9999999',
         'itsdangerous==0.24',
-        'Jinja2==2.10',
+        'Jinja2==2.11.3',
         'Markdown==2.6.11',
         'MarkupSafe==1.0',
         'numpy==1.17.0',
