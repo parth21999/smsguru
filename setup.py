@@ -23,7 +23,7 @@ setup(
         'numpy==1.17.0',
         'olefile==0.44',
         'Pillow==6.1.0',
-        'protobuf==3.5.1',
+        'protobuf==3.18.3',
         'six==1.11.0',
         'Werkzeug==0.14.1',
         'wikipedia==1.4.0',
